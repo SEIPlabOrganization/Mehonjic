@@ -1,0 +1,60 @@
+<!doctype html>
+<HTML>
+<HEAD>
+    <SCRIPT language="javascript">
+        function addRow(tableID)
+		{
+		
+			var table = document.getElementById(tableID);
+			var tmp=0;
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+			tmp=rowCount+1;
+			var cell2 = row.insertCell(0);
+			cell2.innerHTML = "answer " + tmp + ": ";
+			
+            var cell1 = row.insertCell(1);
+            var element1 = document.createElement("input");
+            element1.type = "text";
+			
+			element1.name = "answer" + tmp;
+            cell1.appendChild(element1);
+			
+        }
+ 
+    </SCRIPT>
+</HEAD>
+<style type="text/css">
+h1 {color: white}
+</style>
+<BODY>
+<table>
+	<tr>
+		<td style="background-color:#0066FF; width:1000px; height:10px">
+			<h1>Survey</h1>
+		</td>
+	</tr>
+	</table>
+ 
+	<form action="Database" method="get">
+	<textarea rows="2" cols="120" name="question">Enter your question here</textarea>
+	<br/>&nbsp;Deadline: &nbsp;
+	<input type="text" name="deadline"/>
+    <TABLE id="dataTable" border="0">
+		<TR>
+		    <TD> Answer 1: </TD>
+            <TD> <INPUT type="text" name="answer1" /> </TD>
+        </TR>
+    </TABLE>
+	
+	    <INPUT type="button" value="Add answer" onclick="addRow('dataTable')" />
+<br/> 
+ <input type="radio" name="type" value="single" /> Single choice
+<br /><input type="radio" name="type" value="multi" /> Multiple choice
+<br/>
+<input type="submit" value="Submit" />
+	</form>
+ 
+</BODY>
+</HTML>
