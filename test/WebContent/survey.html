@@ -1,7 +1,7 @@
-<!doctype html>
+
 <HTML>
 <HEAD>
-    <SCRIPT language="javascript">
+    <SCRIPT>
         function addRow(tableID)
 		{
 		
@@ -18,7 +18,7 @@
             var element1 = document.createElement("input");
             element1.type = "text";
 			
-			element1.name = "answer";// + tmp;
+			element1.name = "answer";
             cell1.appendChild(element1);
 			
         }
@@ -41,7 +41,7 @@ h1 {color: white}
 	<textarea rows="2" cols="120" name="question">Enter your question here</textarea>
 	<br/>&nbsp;Deadline: &nbsp;
 	<input type="date" name="deadline"/>
-    <TABLE id="dataTable" border="0">
+    <TABLE id="dataTable">
 		<TR>
 		    <TD> Answer 1: </TD>
             <TD> <INPUT type="text" name="answer" /> </TD>

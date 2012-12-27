@@ -11,16 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>AddRow</display-name>
-    <servlet-name>AddRow</servlet-name>
-    <servlet-class>AddRow</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddRow</servlet-name>
-    <url-pattern>/AddRow</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>Database</display-name>
     <servlet-name>Database</servlet-name>
     <servlet-class>Database</servlet-class>

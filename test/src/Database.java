@@ -23,7 +23,7 @@ public class Database extends HttpServlet
 	  {
 		  super.init(config);
 	  }
-  /**Process the HTTP Get request*/
+ 
 	  public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
   		{
 		  String connectionURL = "jdbc:mysql://localhost/projekt";
