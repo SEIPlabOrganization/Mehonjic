@@ -1,60 +1,28 @@
 
 <HTML>
 <HEAD>
-    <SCRIPT>
-        function addRow(tableID)
-		{
-		
-			var table = document.getElementById(tableID);
-			var tmp=0;
- 
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-			tmp=rowCount+1;
-			var cell2 = row.insertCell(0);
-			cell2.innerHTML = "Answer " + tmp + ": ";
-			
-            var cell1 = row.insertCell(1);
-            var element1 = document.createElement("input");
-            element1.type = "text";
-			
-			element1.name = "answer";
-            cell1.appendChild(element1);
-			
-        }
- 
-    </SCRIPT>
+    
 </HEAD>
-<style type="text/css">
-h1 {color: white}
-</style>
+
 <BODY>
 <table>
 	<tr>
 		<td style="background-color:#0066FF; width:1000px; height:10px">
-			<h1>Survey</h1>
+			<h1 style="color:white">Survey</h1>
 		</td>
 	</tr>
-	</table>
- 
-	<form action="Database" method="get">
-	<textarea rows="2" cols="120" name="question">Enter your question here</textarea>
-	<br/>&nbsp;Deadline: &nbsp;
-	<input type="date" name="deadline"/>
-    <TABLE id="dataTable">
-		<TR>
-		    <TD> Answer 1: </TD>
-            <TD> <INPUT type="text" name="answer" /> </TD>
-        </TR>
-    </TABLE>
-	
-	    <INPUT type="button" value="Add answer" onclick="addRow('dataTable')" />
-<br/> 
- <input type="radio" name="type" value="single" /> Single choice
-<br /><input type="radio" name="type" value="multi" /> Multiple choice
-<br/>
-<input type="submit" value="Submit" />
-	</form>
- 
+</table>
+
+<h2>Ovo je stranica namjenjena anketama</h2>
+<div align="left">
+<form action="Survey" method="get">
+<input type="hidden" name="someuser"/>
+<input type="submit" value="My surveys" />
+</form>
+
+
+
+<input type=button onClick="location.href='../test/survey_managment.html'" value='Create survey'>
+</div>
 </BODY>
 </HTML>

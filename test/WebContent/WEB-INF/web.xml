@@ -19,4 +19,14 @@
     <servlet-name>Database</servlet-name>
     <url-pattern>/Database</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Survey</display-name>
+    <servlet-name>Survey</servlet-name>
+    <servlet-class>Survey</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Survey</servlet-name>
+    <url-pattern>/Survey</url-pattern>
+  </servlet-mapping>
 </web-app>
