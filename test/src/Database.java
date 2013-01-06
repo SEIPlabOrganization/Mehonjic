@@ -34,10 +34,6 @@ public class Database extends HttpServlet
 		  res.setContentType("text/html");
 		  PrintWriter out = res.getWriter();
 		 
-		 
-		  
-		  //get the variables entered in the form
-		  
 		  
 		  String Question = req.getParameter("question");
 		  
@@ -56,35 +52,34 @@ public class Database extends HttpServlet
 			  connection = DriverManager.getConnection
 			  (connectionURL, "root", "root"); 
 			  String sql = 
-					  "insert into survey (Question,Deadline,Answer,Type,ID) values (?,?,?,?,?)";
+					  "insert into survey (Type,Deadline,Question) values (?,?,?)";
 					  PreparedStatement pst = 
 					  connection.prepareStatement(sql);
-			 int ID = 0;
-			  ResultSet rs = pst.executeQuery("SELECT max(ID) FROM survey");
-			  while (rs.next())
-			  {
-				  ID = rs.getInt("max(ID)");
-				  ID = ID + 1;
-				 
-			  }
-			  
+		
 			  	  
+				  pst.setString(1, Type);
+				  pst.setString(2, Deadline);
+				  pst.setString(3, Question);		 	 
+				  pst.executeUpdate();
+		 
+				  pst.close();
+				  
+				  String sql2 = 
+						  "insert into answers (Answer,idSurvey) values (? ,(SELECT max(idSurvey) FROM survey));";
+						  PreparedStatement pst2 = 
+						  connection.prepareStatement(sql2);
 			  for(int i=0; i<answer.length; i++)
 			  	{
-				  pst.setString(1, Question);
-				  pst.setString(2, Deadline);
-				  pst.setString(3, answer[i]);
-				  pst.setString(4, Type);
-				  pst.setInt(5, ID);
-				  pst.executeUpdate();
-				}
 			  
- 
-  
-		
+				  pst2.setString(1, answer[i]);
+				 
+				  
+					  pst2.executeUpdate();
+			  	}
+			  pst2.close();
+					
 			  out.println("Survey successfully created!");
-			  rs.close();
-			  pst.close();
+			  
 		  }
 		  
   catch(ClassNotFoundException e)
@@ -102,7 +97,7 @@ public class Database extends HttpServlet
 	  out.println(e);
   }
   finally {
-  // Always close the database connection.
+
 	  try 
 	  {
 		  	if (connection != null) connection.close();
