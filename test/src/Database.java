@@ -27,14 +27,9 @@ public class Database extends HttpServlet
 	  public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
   		{
 		  String connectionURL = "jdbc:mysql://localhost/projekt";
-		  Connection connection=null;
-	      
-	      
-		  
+		  Connection connection=null;	  
 		  res.setContentType("text/html");
-		  PrintWriter out = res.getWriter();
-		 
-		  
+		  PrintWriter out = res.getWriter();  
 		  String Question = req.getParameter("question");
 		  
 		  String Deadline = req.getParameter("deadline");
@@ -72,14 +67,12 @@ public class Database extends HttpServlet
 			  	{
 			  
 				  pst2.setString(1, answer[i]);
-				 
-				  
-					  pst2.executeUpdate();
+				  pst2.executeUpdate();
 			  	}
 			  pst2.close();
 					
 			  out.println("Survey successfully created!");
-			  
+			  out.println("<a href=\"http://localhost:8080/test/survey.html\">Click here to get back</a>");		  
 		  }
 		  
   catch(ClassNotFoundException e)

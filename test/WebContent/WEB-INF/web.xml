@@ -29,4 +29,14 @@
     <servlet-name>Survey</servlet-name>
     <url-pattern>/Survey</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Submit</display-name>
+    <servlet-name>Submit</servlet-name>
+    <servlet-class>Submit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Submit</servlet-name>
+    <url-pattern>/Submit</url-pattern>
+  </servlet-mapping>
 </web-app>
