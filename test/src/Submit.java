@@ -45,26 +45,31 @@ public class Submit extends HttpServlet {
 			Statement stmt2;
 			ResultSet rs;
 			ResultSet rs2;
+			
+
 		  try 
 		  {
-			  //
+			  
 			  Class.forName("com.mysql.jdbc.Driver");
 			  
 			  connection = DriverManager.getConnection
 			  (connectionURL, "root", "root"); 
 			  stmt = connection.createStatement();
 			  stmt2 = connection.createStatement();
+			  
+			if (radio != null)
+			  {
 			  rs = stmt.executeQuery("SELECT AnswerCounter FROM answers where Answer= '"+ radio +"' AND idSurvey = "+ id +";");
 			  rs2 = stmt2.executeQuery("SELECT SubmitCounter FROM survey where idSurvey = "+ id +";");
 			  
-			 while (rs.next())
-			 {
-				 acounter = rs.getInt(1);
-			 }
-			 while (rs2.next())
-			 {
-				 scounter=rs2.getInt(1);
-			 }
+				 while (rs.next())
+				 {
+					 acounter = rs.getInt(1);
+				 }
+				 while (rs2.next())
+				 {
+					 scounter=rs2.getInt(1);
+				 }
 				 acounter++;
 				 scounter++;
 				 String sql = "UPDATE answers SET AnswerCounter = "+ acounter + " WHERE Answer = '"+ radio +"' AND idSurvey ="+ id +";";
@@ -75,10 +80,44 @@ public class Submit extends HttpServlet {
 				 PreparedStatement pst2 = connection.prepareStatement(sql2);
 				 pst2.executeUpdate();
 				 pst2.close();		
-				 out.println("You have sucesfully voted for answer: "+ radio +"!");
+				 out.println("You have successfully voted for answer: "+ radio +"!");
 				 out.println("<br/>");
 				 out.println("Thank You");
-				 out.println("<a href=\"http://localhost:8080/test/survey.html\">Click here to get back</a>");		  
+				 out.println("<a href=\"http://localhost:8080/test/survey_index.jsp\">Click here to get back</a>");	
+			  }
+			  else {
+				  for(int i=0; i<checkbox.length; i++)
+				  {
+				  rs = stmt.executeQuery("SELECT AnswerCounter FROM answers where Answer= '"+ checkbox[i] +"' AND idSurvey = "+ id +";");
+				  rs2 = stmt2.executeQuery("SELECT SubmitCounter FROM survey where idSurvey = "+ id +";");
+							  while (rs.next())
+							  {
+								 acounter = rs.getInt(1);
+							  }
+							  while (rs2.next())
+							  {
+								 scounter=rs2.getInt(1);
+							  }
+						 acounter++;
+						 
+						 String sql = "UPDATE answers SET AnswerCounter = "+ acounter + " WHERE Answer = '"+ checkbox[i] +"' AND idSurvey ="+ id +";";
+						 PreparedStatement pst = connection.prepareStatement(sql);
+						 pst.executeUpdate();
+						 pst.close();	
+						 out.println("You have successfully voted for answer: "+ checkbox[i] +"!");
+						 out.println("<br>");
+				  	}
+				  		 scounter++;
+						 String sql2 = "UPDATE survey SET SubmitCounter = "+ scounter + " WHERE idSurvey ="+ id +";";
+						 PreparedStatement pst2 = connection.prepareStatement(sql2);
+						 pst2.executeUpdate();
+						 pst2.close();		
+						 
+						 out.println("<br/>");
+						 out.println("Thank You");
+						 out.println("<a href=\"http://localhost:8080/test/survey_index.jsp\">Click here to get back</a>");	
+				  			  
+			  }
 		  }
 		  
   catch(ClassNotFoundException e)
@@ -93,7 +132,11 @@ public class Submit extends HttpServlet {
   }
   catch (Exception e)
   {
+	  out.println("Please select at least one answer");
+	  out.println("<a href=\"http://localhost:8080/test/survey_index.jsp\">Click here to get back</a>");	
+	  out.println("<br>");
 	  out.println(e);
+	  
   }
   finally {
 
@@ -108,7 +151,8 @@ public class Submit extends HttpServlet {
   	}
   }
 }
-
 	
+
+
 
 

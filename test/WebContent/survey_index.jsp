@@ -13,7 +13,7 @@
 	</tr>
 </table>
 
-<h2>Ovo je stranica namjenjena anketama</h2>
+<h2>Survey index page</h2>
 <div align="left">
 <form action="Survey" method="get">
 <input type="hidden" name="someuser"/>
@@ -22,7 +22,7 @@
 
 
 
-<input type=button onClick="location.href='../test/survey_managment.html'" value='Create survey'>
+<input type=button onClick="location.href='../test/survey_management.jsp'" value='Create survey'>
 </div>
 </BODY>
 </HTML>

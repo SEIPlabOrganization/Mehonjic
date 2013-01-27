@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.*;
+import java.util.Date;
 
 import java.sql.SQLException;
 
@@ -28,17 +29,20 @@ public class Database extends HttpServlet
   		{
 		  String connectionURL = "jdbc:mysql://localhost/projekt";
 		  Connection connection=null;	  
+		  
 		  res.setContentType("text/html");
 		  PrintWriter out = res.getWriter();  
 		  String Question = req.getParameter("question");
 		  
 		  String Deadline = req.getParameter("deadline");
 		  
+		  
 		  String[] answer = req.getParameterValues("answer");
 		  
 		  String Type = req.getParameter("type");
 		  
 		 
+		  
 		  try 
 		  {
 			  // Load the database driver
@@ -72,25 +76,36 @@ public class Database extends HttpServlet
 			  pst2.close();
 					
 			  out.println("Survey successfully created!");
-			  out.println("<a href=\"http://localhost:8080/test/survey.html\">Click here to get back</a>");		  
+			  out.println("<a href=\"http://localhost:8080/test/survey_index.jsp\">Click here to get back</a>");		  
 		  }
+		  
 		  
   catch(ClassNotFoundException e)
   {
+	  out.println("<br>");
 	  out.println("Couldn't load database driver: " 
 	  + e.getMessage());
   }
   catch(SQLException e)
-  {
+  { 
+	  if (Deadline.equals(""))
+
+		  {
+			  out.println("Deadline is empty. Please set deadline.");
+		  }
+	  
+	  out.println("<br>");
 	  out.println("SQLException caught: " 
 	  + e.getMessage());
+	  out.println("<br>");
+	  out.println("<a href=\"http://localhost:8080/test/survey_management.jsp\">Click here to get back</a>");	
   }
   catch (Exception e)
   {
+	  out.println("<br>");
 	  out.println(e);
   }
   finally {
-
 	  try 
 	  {
 		  	if (connection != null) connection.close();
