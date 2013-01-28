@@ -16,7 +16,7 @@
 <h2>Survey index page</h2>
 <div align="left">
 <form action="Survey" method="get">
-<input type="hidden" name="someuser"/>
+<input type="hidden" name="id"/>
 <input type="submit" value="My surveys" />
 </form>
 
